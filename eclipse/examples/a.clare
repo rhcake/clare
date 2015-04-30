@@ -1,0 +1,16 @@
+
+class vec2 {
+	i32 x;
+	i32 y;
+}
+
+class vec3 {
+	vec2 v2;
+	i32 z;
+}
+
+i32 main(i32 argc) {
+	vec3 v3;
+	v3.v2.y = 4;
+	return v3.v2.y;
+}

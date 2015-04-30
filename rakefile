@@ -1,0 +1,35 @@
+require "rake/clean"
+
+
+GENDIR 		= "gen/clare"
+GENHANDLE 	= "#{GENDIR}/lang.tokens"
+GRAMMAR 	= "clare.g4"
+LIB_ANTLR4	= "antlr-4.2-complete.jar"
+MAIN_ANTLR4	= "org.antlr.v4.Tool"
+
+
+directory GENDIR
+
+
+task :default => GENHANDLE
+
+
+file GENHANDLE => [GENDIR, GRAMMAR] do
+	lib = File.absolute_path(LIB_ANTLR4)
+	grammar = File.absolute_path(GRAMMAR)
+	Dir.chdir(GENDIR) do
+		sh "java -cp .;#{lib} #{MAIN_ANTLR4} -visitor #{grammar}"
+	end
+end
+
+CLEAN.include("gen")
+
+
+
+
+
+
+
+
+
+
