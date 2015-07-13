@@ -44,10 +44,12 @@ public class Asm {
 			i++;
 			
 			for (Block b : blocks) {
+				
 				Set<VReg> in = b.copyInVRegs();
 				Set<VReg> out = b.copyOutVRegs();
 				Set<VReg> kill = b.copyKillVRegs();
 				Set<VReg> gen = b.copyGenVRegs();
+				
 				b.setInVRegs(Sets.union(gen, Sets.minus(out, kill)));
 				b.setOutVRegs(b.getOutBlocks().stream()
 						.map(Block::getInVRegs)
